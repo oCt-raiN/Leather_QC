@@ -11,7 +11,7 @@ Original file is located at
 
 import os
 
-!unzip /content/drive/MyDrive/leather_dataset/leather_dataset.zip
+
 
 # one time for filename change
 
@@ -32,7 +32,7 @@ import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 # For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
 
 import os
-for dirname, _, filenames in os.walk('/content/content/Leather_Defect_Classification'):
+for dirname, _, filenames in os.walk('./Leather_Defect_Classification'):
     for filename in filenames:
         print(os.path.join(dirname, filename))
 
@@ -41,7 +41,7 @@ import pandas as pd
 import os
 import tensorflow as tf
 
-train_dir = "/content/content/Leather_Defect_Classification"
+train_dir = "./Leather_Defect_Classification"
 
 train_ds = tf.keras.utils.image_dataset_from_directory(
   train_dir,
@@ -202,4 +202,4 @@ plt.ylim(0, 10)
 # Show plot
 plt.show()
 
-model.save('/content/drive/MyDrive/leather_dataset/leather_defect_model', save_format='tf')
+model.save('leather_defect_model', save_format='tf')
