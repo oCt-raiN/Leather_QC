@@ -81,6 +81,13 @@
 		<p>Drag your files here or click in this area.</p>
 		<button type="submit">Upload</button>
 	</form>
+	{% for message in messages %}
+    {% if message.tags == 'error' %}
+    <p class="form_error text-danger"
+    style="font-size: 13px; font-style:italic; font-family: open serif; text-align:center ;color: red;" >
+    {{message}}</p>
+    {% endif %}
+	{% endfor %}
 </body>
 
 </html>
