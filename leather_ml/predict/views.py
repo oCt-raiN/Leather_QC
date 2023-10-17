@@ -128,7 +128,14 @@ def upload(request):
                         temp.append(res)
                         temp.append(content)
                         dat.append(temp)
+                data_csv = [dat]
+                data_csv = data_csv[0]
                 context = {"dat":dat}
+                for i in range(0,len(data_csv)):
+                    data_csv[i][0] = data_csv[i][0].split("/")[-1].split(".")[0]
+                    data_csv[i][2] = data_csv[i][2].split("and with the confidence rate of")[-1].split(".")[0]
+                df = pd.DataFrame(data_csv,columns=["Image","Type","Percentage"])
+                df.to_csv("media/{}/output/output.csv".format(str(u)))
 
             elif filename.endswith("rar"):
                 print("rar")
