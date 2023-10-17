@@ -64,22 +64,46 @@
 		form button:active {
 			border: 0;
 		}
+		.whole{
+			display: block;
+		}
+		.loader {
+			display: none;
+			top: 50%;
+			left: 50%;
+			position: absolute;
+			transform: translate(-50%, -50%);
+		  }
+		  
+		  .loading {
+			border: 2px solid #ccc;
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			border-top-color: #1ecd97;
+			border-left-color: #1ecd97;
+			animation: spin 1s infinite ease-in;
+		  }
+		  
+		  @keyframes spin {
+			0% {
+			  transform: rotate(0deg);
+			}
+		  
+			100% {
+			  transform: rotate(360deg);
+			}
+		  }
 	</style>
-	<script>
-		$(document).ready(function () {
-			$('form input').change(function () {
-				$('form p').text(this.files.length + " file(s) selected");
-			});
-		});
-	</script>
 </head>
 
 <body>
+<div class="whole">
 	<form action="upload" method='post' enctype="multipart/form-data">
 		{% csrf_token %}
 		<input type="file" name="pic" lang="es" required>
 		<p>Drag your files here or click in this area.</p>
-		<button type="submit">Upload</button>
+		<button type="submit" onclick="spinner()">Upload</button>
 	</form>
 	{% for message in messages %}
     {% if message.tags == 'error' %}
@@ -88,6 +112,22 @@
     {{message}}</p>
     {% endif %}
 	{% endfor %}
-</body>
+</div>
+<div class="loader">
+	<div class="loading">
+	</div>
+  </div>
 
+</body>
+<script type="text/javascript">
+    function spinner() {
+        document.getElementsByClassName("loader")[0].style.display = "block";
+		document.getElementsByClassName("whole")[0].style.display="none";
+    }
+	$(document).ready(function () {
+		$('form input').change(function () {
+			$('form p').text(this.files.length + " file(s) selected");
+		});
+	});
+</script>  
 </html>
